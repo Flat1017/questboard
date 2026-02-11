@@ -25,8 +25,11 @@ export default async function AchievementLogPage() {
 
   return (
     <main className="main-panel">
-      <h2 style={{ marginTop: 0, color: "var(--ui-text)" }}>ギルド達成ログ</h2>
-      <div style={{ display: "grid", gap: 10 }}>
+      <div className="panel-heading">
+        <h2 className="panel-title">ギルド達成ログ</h2>
+        <p className="panel-subtitle">酒場で語り継がれる達成の記録です。</p>
+      </div>
+      <div className="stack-list">
         {(data ?? []).map((entry) => (
           <div key={entry.id} className="timeline-card">
             <div>

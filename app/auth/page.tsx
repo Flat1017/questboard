@@ -44,10 +44,10 @@ export default function AuthPage() {
   }
 
   return (
-    <main className="guild-shell" style={{ maxWidth: 460, paddingTop: 48 }}>
+    <main className="guild-shell auth-shell">
       <section className="auth-card">
-        <h1 style={{ marginTop: 0 }}>冒険者ログイン</h1>
-        <p className="inline-note">メールとパスワードでログインします。</p>
+        <h1 className="card-title">冒険者ログイン</h1>
+        <p className="inline-note section-copy">黒樽亭の掲示板に入るため、通行証を確認します。</p>
 
         <form onSubmit={submit}>
           {isSignUp ? (
@@ -84,11 +84,11 @@ export default function AuthPage() {
           </button>
         </form>
 
-        <button className="btn" style={{ marginTop: 10 }} onClick={() => setIsSignUp((v) => !v)}>
+        <button className="btn toggle-auth-btn" type="button" onClick={() => setIsSignUp((v) => !v)}>
           {isSignUp ? "ログイン画面へ" : "新規登録へ"}
         </button>
 
-        {message ? <p className="inline-note">{message}</p> : null}
+        {message ? <p className="inline-note status-msg">{message}</p> : null}
       </section>
     </main>
   );

@@ -12,7 +12,7 @@ export function ReadMore({ text }: { text: string }) {
   return (
     <div className="quest-detail">
       {expanded ? text : `${text.slice(0, 120)}...`}
-      <button className="btn" style={{ marginTop: 8 }} onClick={() => setExpanded((v) => !v)}>
+      <button className="btn read-more-btn" type="button" onClick={() => setExpanded((v) => !v)}>
         {expanded ? "折りたたむ" : "続きを読む"}
       </button>
     </div>

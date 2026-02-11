@@ -26,8 +26,11 @@ export default async function ArchivePage() {
 
   return (
     <main className="main-panel">
-      <h2 style={{ marginTop: 0, color: "var(--ui-text)" }}>アーカイブ</h2>
-      <div style={{ display: "grid", gap: 10 }}>
+      <div className="panel-heading">
+        <h2 className="panel-title">アーカイブ</h2>
+        <p className="panel-subtitle">完了して保管された依頼を振り返れます。</p>
+      </div>
+      <div className="stack-list">
         {(data ?? []).map((item) => (
           <div key={item.id} className="archive-card">
             <div>

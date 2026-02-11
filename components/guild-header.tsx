@@ -22,18 +22,27 @@ export function GuildHeader({ displayName }: { displayName: string }) {
 
   return (
     <header className="guild-header">
-      <div>
+      <span className="header-lantern left" aria-hidden />
+      <span className="header-lantern right" aria-hidden />
+
+      <div className="guild-brand">
+        <p className="tavern-signline">The Black Cask Tavern</p>
         <div className="guild-title">冒険者ギルド掲示板</div>
-        <div className="inline-note">ようこそ、{displayName} さん</div>
+        <div className="inline-note tavern-welcome">ようこそ、{displayName} さん</div>
       </div>
       <nav className="guild-nav">
         {NAVS.map((nav) => (
-          <Link key={nav.href} href={nav.href} className={`nav-link ${pathname === nav.href ? "active" : ""}`}>
+          <Link
+            key={nav.href}
+            href={nav.href}
+            aria-current={pathname === nav.href ? "page" : undefined}
+            className={`nav-link ${pathname === nav.href ? "active" : ""}`}
+          >
             {nav.label}
           </Link>
         ))}
         <ThemeToggle />
-        <button className="btn" onClick={signOut}>
+        <button className="btn" type="button" onClick={signOut}>
           ログアウト
         </button>
       </nav>

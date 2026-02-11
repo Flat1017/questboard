@@ -106,16 +106,24 @@ export function BoardClient({ myUserId, role, totalXp }: Props) {
   return (
     <>
       <div className="kpi">
-        <span>あなたの累計XP: {totalXp}</span>
+        <span className="kpi-label">酒場での評判</span>
+        <strong className="kpi-value">{totalXp} XP</strong>
+        <span className="inline-note">達成報告で評判はさらに上がります</span>
       </div>
 
       {role === "ADMIN" ? <QuestForm onCreated={loadAll} /> : null}
 
       <div className="main-panel">
+        <div className="panel-heading">
+          <h2 className="panel-title">本日の依頼板</h2>
+          <p className="panel-subtitle">炉端の灯りの下で、仲間の頼みごとを選びましょう。</p>
+        </div>
+
         <div className="tabs">
           {TABS.map((tab) => (
             <button
               key={tab.value}
+              type="button"
               className={`tab-btn ${tab.value === activeTab ? "active" : ""}`}
               onClick={() => setActiveTab(tab.value)}
             >
@@ -135,6 +143,7 @@ export function BoardClient({ myUserId, role, totalXp }: Props) {
           ].map(([key, label]) => (
             <button
               key={key}
+              type="button"
               className={`chip ${filter === key ? "active" : ""}`}
               onClick={() => setFilter(key as DeadlineFilter)}
             >
@@ -143,6 +152,7 @@ export function BoardClient({ myUserId, role, totalXp }: Props) {
           ))}
 
           <input
+            className="date-input"
             type="date"
             value={pickedDate}
             onChange={(e) => {
@@ -156,6 +166,7 @@ export function BoardClient({ myUserId, role, totalXp }: Props) {
           {visible.map((quest) => (
             <div
               key={quest.id}
+              className="quest-drag-wrapper"
               draggable
               onDragStart={() => setDragId(quest.id)}
               onDragOver={(e) => e.preventDefault()}

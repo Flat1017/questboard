@@ -35,7 +35,8 @@ export function QuestForm({ onCreated }: Props) {
 
   return (
     <form className="form-card" onSubmit={submit}>
-      <h3 style={{ marginTop: 0 }}>新しいクエスト</h3>
+      <h3 className="card-title">新しい依頼を掲示する</h3>
+      <p className="inline-note section-copy">今夜の酒場掲示板に、冒険者向けの依頼を追加します。</p>
       <div className="field">
         <label htmlFor="title">タイトル (必須)</label>
         <input id="title" value={title} onChange={(e) => setTitle(e.target.value)} required maxLength={80} />

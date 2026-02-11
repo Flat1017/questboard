@@ -83,22 +83,22 @@ export function QuestCard({
 
         <div className="quest-actions">
           {canAccept ? (
-            <button className="btn primary" disabled={isBusy} onClick={() => run(() => onAccept(quest.id))}>
+            <button className="btn primary" type="button" disabled={isBusy} onClick={() => run(() => onAccept(quest.id))}>
               受注する
             </button>
           ) : null}
           {canUnaccept ? (
-            <button className="btn" disabled={isBusy} onClick={() => run(() => onUnaccept(quest.id))}>
+            <button className="btn" type="button" disabled={isBusy} onClick={() => run(() => onUnaccept(quest.id))}>
               受注解除
             </button>
           ) : null}
           {canComplete ? (
-            <button className="btn alert" disabled={isBusy} onClick={() => run(() => onComplete(quest.id), true)}>
+            <button className="btn alert" type="button" disabled={isBusy} onClick={() => run(() => onComplete(quest.id), true)}>
               達成する (+{XP_BY_DIFFICULTY[quest.difficulty]} XP)
             </button>
           ) : null}
           {canReopen ? (
-            <button className="btn" disabled={isBusy} onClick={() => run(() => onReopen(quest.id))}>
+            <button className="btn" type="button" disabled={isBusy} onClick={() => run(() => onReopen(quest.id))}>
               DOINGに戻す (-{XP_BY_DIFFICULTY[quest.difficulty]} XP)
             </button>
           ) : null}

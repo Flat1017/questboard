@@ -33,21 +33,24 @@ export function MemberApprovalPanel() {
   }
 
   return (
-    <section className="main-panel">
-      <h3 style={{ marginTop: 0, color: "var(--ui-text)" }}>参加申請</h3>
+    <section className="main-panel approval-panel">
+      <div className="panel-heading">
+        <h3 className="panel-title">酒場への参加申請</h3>
+        <p className="panel-subtitle">新しい冒険者を受け入れるかどうかを決めてください。</p>
+      </div>
       {members.length === 0 ? (
         <p className="inline-note">承認待ちはありません。</p>
       ) : (
         members.map((member) => (
-          <div key={member.id} className="timeline-card" style={{ marginBottom: 10 }}>
+          <div key={member.id} className="timeline-card approval-item">
             <div>
-              <strong>{member.display_name}</strong>
+              <strong className="approval-name">{member.display_name}</strong>
             </div>
             <div className="quest-actions">
-              <button className="btn primary" onClick={() => update(member.id, "APPROVED")}>
+              <button className="btn primary" type="button" onClick={() => update(member.id, "APPROVED")}>
                 承認
               </button>
-              <button className="btn" onClick={() => update(member.id, "REJECTED")}>
+              <button className="btn" type="button" onClick={() => update(member.id, "REJECTED")}>
                 却下
               </button>
             </div>

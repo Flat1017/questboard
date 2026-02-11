@@ -22,7 +22,7 @@ export function ThemeToggle() {
   };
 
   return (
-    <button className="btn" onClick={toggle}>
+    <button className="btn" type="button" onClick={toggle}>
       {theme === "day" ? "夜の酒場" : "昼の掲示板"}
     </button>
   );

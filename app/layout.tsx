@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Quest Board",
-  description: "冒険者ギルドのクエストボード"
+  title: "黒樽亭クエストボード",
+  description: "中世酒場の世界観で使う冒険者ギルド掲示板"
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
