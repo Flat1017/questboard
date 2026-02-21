@@ -1,12 +1,14 @@
 {
-  "name": "guestboard",
+  "name": "questboard",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sync:env": "node scripts/sync-env.mjs",
+    "sync:env:dry": "node scripts/sync-env.mjs --dry-run"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.2",

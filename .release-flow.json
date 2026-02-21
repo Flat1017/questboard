@@ -1,0 +1,11 @@
+{
+  "baseBranch": "main",
+  "githubRepo": "Flat1017/questboard",
+  "githubApp": "actions",
+  "envFile": ".env.local",
+  "services": ["github", "vercel", "supabase"],
+  "vercelTargets": ["production", "preview", "development"],
+  "supabaseProjectRef": "",
+  "checks": ["npm run lint", "npm run build"],
+  "production": false
+}

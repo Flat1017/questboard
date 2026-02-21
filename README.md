@@ -26,6 +26,39 @@ Set:
 npm run dev
 ```
 
+## Env Sync (GitHub / Vercel / Supabase)
+Use one command to push `.env.local` values to all services.
+
+1. Login once
+```bash
+gh auth login
+vercel login
+supabase login
+```
+
+2. Run sync
+```bash
+npm run sync:env -- --github-repo Flat1017/questboard --supabase-project-ref <your-project-ref>
+```
+
+3. Dry run (no remote changes)
+```bash
+npm run sync:env:dry
+```
+
+### Useful options
+- `--env-file .env.local`
+- `--only github` or `--only vercel,supabase`
+- `--keys NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `--skip-keys SOME_KEY`
+- `--vercel-targets production,preview,development`
+- `--vercel-scope <team-or-user-scope>`
+
+### Notes
+- GitHub sync uses `gh secret set` (`--github-app` supports `actions`, `codespaces`, `dependabot`).
+- Vercel sync replaces existing keys (`vercel env rm` then `vercel env add`) for each target. Run `vercel link` once if this folder is not linked yet.
+- Supabase sync sets project secrets (`supabase secrets set`) and requires `--supabase-project-ref`.
+
 ## Implemented MVP
 - 日本語UI
 - OPEN / DOING / DONE タブ

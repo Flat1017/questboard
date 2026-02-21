@@ -3,6 +3,10 @@
 import { useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase-client";
 
+function normalizeEmail(raw: string) {
+  return raw.normalize("NFKC").replace(/\s+/g, "").toLowerCase();
+}
+
 export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [displayName, setDisplayName] = useState("");
@@ -18,26 +22,37 @@ export default function AuthPage() {
 
     try {
       const supabase = createSupabaseBrowserClient();
+      const normalizedEmail = normalizeEmail(email);
+
+      if (!normalizedEmail) {
+        setMessage("メールアドレスを入力してください。");
+        return;
+      }
 
       if (isSignUp) {
         const { error } = await supabase.auth.signUp({
-          email,
+          email: normalizedEmail,
           password,
           options: {
             data: {
-              display_name: displayName || email.split("@")[0]
+              display_name: displayName || normalizedEmail.split("@")[0]
             }
           }
         });
         if (error) throw error;
         setMessage("登録しました。管理者承認後にログインしてください。");
       } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { error } = await supabase.auth.signInWithPassword({ email: normalizedEmail, password });
         if (error) throw error;
         window.location.href = "/board";
       }
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : "認証に失敗しました");
+      const rawMessage = error instanceof Error ? error.message : "認証に失敗しました";
+      if (rawMessage.includes("Email address") && rawMessage.includes("is invalid")) {
+        setMessage("メールアドレス形式が不正です。全角文字や空白が含まれていないか確認してください。");
+      } else {
+        setMessage(rawMessage);
+      }
     } finally {
       setBusy(false);
     }
