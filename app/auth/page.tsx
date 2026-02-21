@@ -4,7 +4,14 @@ import { useState } from "react";
 import { createSupabaseBrowserClient } from "@/lib/supabase-client";
 
 function normalizeEmail(raw: string) {
-  return raw.normalize("NFKC").replace(/\s+/g, "").toLowerCase();
+  return raw
+    .normalize("NFKC")
+    .replace(/[\p{Z}\p{Cc}\p{Cf}]+/gu, "")
+    .toLowerCase();
+}
+
+function isEmailFormatValid(email: string) {
+  return /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)+$/i.test(email);
 }
 
 export default function AuthPage() {
@@ -26,6 +33,11 @@ export default function AuthPage() {
 
       if (!normalizedEmail) {
         setMessage("メールアドレスを入力してください。");
+        return;
+      }
+
+      if (!isEmailFormatValid(normalizedEmail)) {
+        setMessage("メールアドレス形式が不正です。全角文字や空白が含まれていないか確認してください。");
         return;
       }
 
